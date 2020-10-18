@@ -15,6 +15,10 @@ class Setter:
             print("{0} => {1}".format(key, Setter.key_value_dictionary[key]))
 
     @staticmethod
+    def get_current_keys():
+        return Setter.key_value_dictionary.keys()
+
+    @staticmethod
     def set_key_value(key, value):
         all_keys = Setter.key_value_dictionary.keys()
         if key not in all_keys:

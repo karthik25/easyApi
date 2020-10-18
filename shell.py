@@ -8,7 +8,7 @@ class Shell:
 
     def start(self):
         loader = Loader()
-        print("Shell: Enter your command (set, list or exec")
+        print("Shell: Enter your command (set, list or exec)")
         command = ""
         while command != "exit":
             command = input("> ")
