@@ -1,12 +1,14 @@
 import shlex
 from loader import Loader
+from openapis import Openapis
 
 
 class Shell:
     def __init__(self):
         pass
 
-    def start(self):
+    def start(self, oapi_url):
+        Openapis.populate_all_apis(oapi_url)
         loader = Loader()
         print("Shell: Enter your command (set, list or exec)")
         command = ""

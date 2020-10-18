@@ -12,7 +12,7 @@ class Set:
 
     def run(self, args):
         type = args[0]
-        values = args[1:]
+        values = args[1] if len(args) > 1 else ""
         current_keys = Setter.get_current_keys()
         if type == "list":
             Setter.print_current_keys()
@@ -24,5 +24,5 @@ class Set:
             Setter.set_multiple_keys(props)
         if type in current_keys:
             print("Set: setting {0}".format(type))
-            Setter.set_key_value(type, values[0])
+            Setter.set_key_value(type, values)
 

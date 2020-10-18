@@ -1,3 +1,6 @@
+from openapis import Openapis
+
+
 class List:
     def __init__(self):
         pass
@@ -7,5 +10,4 @@ class List:
         return "list"
 
     def run(self, args):
-        print("Hello from 'list'")
-
+        Openapis.print_all_apis()

@@ -31,3 +31,7 @@ class Setter:
         for key in dict.keys():
             if key in Setter.key_value_dictionary.keys():
                 Setter.key_value_dictionary[key] = dict[key]
+
+    @staticmethod
+    def get_api_header():
+        pass
