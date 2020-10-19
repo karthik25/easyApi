@@ -3,6 +3,7 @@ import shlex
 import urllib.request
 import ssl
 import json
+from tasks.setter import Setter
 from openapis import Openapis
 
 
@@ -60,8 +61,11 @@ class Exec:
                 ctx.verify_mode = ssl.CERT_NONE
 
                 full_url = "{0}{1}".format(Openapis.base_url, url)
+                req_headers = Setter.get_api_headers()
 
-                api_response = urllib.request.urlopen(full_url, context=ctx)
+                req = urllib.request.Request(full_url, headers=req_headers)
+                api_response = urllib.request.urlopen(req, context=ctx)
+
                 response_info = api_response.info()
                 response_content = api_response.read()
                 response_type = response_info.get_content_type()

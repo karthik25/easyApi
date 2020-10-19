@@ -33,5 +33,8 @@ class Setter:
                 Setter.key_value_dictionary[key] = dict[key]
 
     @staticmethod
-    def get_api_header():
-        pass
+    def get_api_headers():
+        if Setter.key_value_dictionary["token_type"] == "None":
+            return {}
+
+        raise Exception("do not know how to handle {0}".format(Setter.key_value_dictionary["token_type"]))
