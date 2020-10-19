@@ -33,8 +33,19 @@ class Setter:
                 Setter.key_value_dictionary[key] = dict[key]
 
     @staticmethod
+    def generate_access_token():
+        pass
+
+    @staticmethod
     def get_api_headers():
         if Setter.key_value_dictionary["token_type"] == "None":
             return {}
+
+        if Setter.key_value_dictionary["token_type"] == "Bearer":
+            if Setter.key_value_dictionary["access_token"] is not None or Setter.key_value_dictionary["access_token"] != "":
+                return { "Authorization", "Bearer {0}".format(Setter.key_value_dictionary["access_token"])}
+            else:
+                accessToken = Setter.generate_access_token()
+                return {"Authorization", "Bearer {0}".format(accessToken)}
 
         raise Exception("do not know how to handle {0}".format(Setter.key_value_dictionary["token_type"]))
