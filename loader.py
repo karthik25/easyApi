@@ -4,6 +4,7 @@ from tasks.set import Set
 from tasks.list import List
 from tasks.exec import Exec
 from tasks.clear import Clear
+from tasks.filter import Filter
 
 
 class Loader:
