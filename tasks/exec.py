@@ -54,6 +54,9 @@ class Exec:
             if api["key"] == identifier:
                 param_dict = self.get_param_dict(arguments)
                 url = self.get_replaced_url(api["url"], param_dict)
+
+                # todo: if url still has {} stop proceeding
+
                 print("calling {0}".format(url))
 
                 ctx = ssl.create_default_context()
