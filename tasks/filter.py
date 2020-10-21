@@ -1,3 +1,4 @@
+import json
 from result import Result
 
 
@@ -14,7 +15,9 @@ class Filter:
             print("usage: filter <field> <value>")
             return
         last_result = Result.last_result
+        result_items = []
         for item in last_result:
             if item[args[0]] == args[1]:
-                print(item)
+                result_items.append(item)
+        print(json.dumps(result_items, indent=4))
 
