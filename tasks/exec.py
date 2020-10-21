@@ -60,7 +60,7 @@ class Exec:
                 ctx.check_hostname = False
                 ctx.verify_mode = ssl.CERT_NONE
 
-                full_url = "{0}{1}".format(Openapis.base_url, url)
+                full_url = "{0}{1}".format(Openapis.get_base_url(), url)
                 req_headers = Setter.get_api_headers()
 
                 req = urllib.request.Request(full_url, headers=req_headers)

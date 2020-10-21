@@ -1,12 +1,12 @@
 import urllib.request
 import ssl
 import json
+from tasks.setter import Setter
+from urllib.parse import urlparse
 
 
 class Openapis:
     api_listing = []
-
-    base_url = "https://localhost:44391"
 
     api_short_words = ["mine", "marble", "mellow", "futuristic", "zippy", "cap", "fragile", "torpid", "debt","exuberant",
                        "lovely", "subsequent", "advertisement", "fence", "steady", "impulse", "alive", "back", "overrated",
@@ -24,27 +24,35 @@ class Openapis:
         return Openapis.api_listing
 
     @staticmethod
+    def get_base_url():
+        oapi_url = Setter.get_value_by_key("oapi_url")
+        parsed_uri = urlparse(oapi_url)
+        result = '{uri.scheme}://{uri.netloc}'.format(uri=parsed_uri)
+        return result
+
+    @staticmethod
     def populate_all_apis(url):
         print("Openapis: getting the apis")
-
         ctx = ssl.create_default_context()
-        ctx.check_hostname = False
-        ctx.verify_mode = ssl.CERT_NONE
+        if Setter.is_ssl_enabled():
+            ctx.check_hostname = False
+            ctx.verify_mode = ssl.CERT_NONE
 
         oapi_json = urllib.request.urlopen(url, context=ctx).read()
         oapi_config = json.loads(oapi_json)
         i = 1
         for path in oapi_config["paths"]:
             api_details = oapi_config["paths"][path]
-            getter = api_details["get"]
-            if getter is not None:
-                Openapis.api_listing.append({
-                    "id": i,
-                    "key": Openapis.api_short_words[i - 1],
-                    "url": path,
-                    "method": "get"
-                })
-                i = i + 1
+            if "get" in api_details.keys():
+                getter = api_details["get"]
+                if getter is not None:
+                    Openapis.api_listing.append({
+                        "id": i,
+                        "key": Openapis.api_short_words[i - 1],
+                        "url": path,
+                        "method": "get"
+                    })
+                    i = i + 1
 
     @staticmethod
     def print_all_apis():

@@ -1,17 +1,21 @@
 import urllib.request
 import json
 import urllib.parse
+import ssl
 
 
 class Setter:
     key_value_dictionary = {
+        "oapi_url": "",
         "access_token": "",
         "token_endpoint": "",
         "client_id": "",
         "client_secret": "",
         "grant_type": "client_credentials",
         "scope": "",
-        "token_type": "None"
+        "token_type": "None",
+        "disable_ssl": False,
+        "is_debug": False
     }
 
     @staticmethod
@@ -24,12 +28,27 @@ class Setter:
         return Setter.key_value_dictionary.keys()
 
     @staticmethod
+    def get_value_by_key(key):
+        return Setter.key_value_dictionary[key]
+
+    @staticmethod
+    def is_ssl_enabled():
+        return Setter.key_value_dictionary["disable_ssl"] == True
+
+    @staticmethod
+    def is_debug():
+        return Setter.key_value_dictionary["is_debug"] == True
+
+    @staticmethod
     def set_key_value(key, value):
         all_keys = Setter.key_value_dictionary.keys()
         if key not in all_keys:
             print("Unknown key {0}".format(key))  # raise an exception?
             return
-        Setter.key_value_dictionary[key] = value
+        if type(Setter.key_value_dictionary[key]) == str:
+            Setter.key_value_dictionary[key] = value
+        else:
+            Setter.key_value_dictionary[key] = bool(value) # find a safer way?
 
     @staticmethod
     def set_multiple_keys(dict):
@@ -48,9 +67,14 @@ class Setter:
             "client_secret": Setter.key_value_dictionary["client_secret"]
         }
 
+        ctx = ssl.create_default_context()
+        if Setter.is_ssl_enabled():
+            ctx.check_hostname = False
+            ctx.verify_mode = ssl.CERT_NONE
+
         encoded_data = urllib.parse.urlencode(post_data).encode()
         req = urllib.request.Request(full_url, data=encoded_data)
-        token_response = urllib.request.urlopen(req)
+        token_response = urllib.request.urlopen(req,context=ctx)
 
         response_content = token_response.read()
         parsed_response = json.loads(response_content)
@@ -64,12 +88,15 @@ class Setter:
             return {}
 
         if Setter.key_value_dictionary["token_type"] == "Bearer":
-            if Setter.key_value_dictionary["access_token"] is not None or Setter.key_value_dictionary["access_token"] != "":
+            if Setter.key_value_dictionary["access_token"] != "":
                 print("Setter: using the access token")
-                return { "Authorization", "Bearer {0}".format(Setter.key_value_dictionary["access_token"])}
+                return { "Authorization": "Bearer {0}".format(Setter.key_value_dictionary["access_token"])}
             else:
-                print("Setter: genreating the access token")
+                if Setter.is_debug():
+                    print("Setter: genreating the access token")
                 accessToken = Setter.generate_access_token()
-                return {"Authorization", "Bearer {0}".format(accessToken)}
+                if Setter.is_debug():
+                    print("Setter: genreated the access token")
+                return {"Authorization": "Bearer {0}".format(accessToken)}
 
         raise Exception("Do not know how to handle {0}".format(Setter.key_value_dictionary["token_type"]))
