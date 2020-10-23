@@ -5,6 +5,9 @@ from tasks.list import List
 from tasks.exec import Exec
 from tasks.clear import Clear
 from tasks.filter import Filter
+from tasks.call import Call
+from tasks.run import Run
+from tasks.result import Result
 
 
 class Loader:

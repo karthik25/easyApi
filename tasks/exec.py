@@ -75,7 +75,8 @@ class Exec:
                 response_type = response_info.get_content_type()
                 if response_type == "application/json":
                     content_json = json.loads(response_content)
-                    Result.store_result(content_json)
+                    Result.store_result(content_json, response_type)
                     print(json.dumps(content_json, indent=4))
                 else:
+                    Result.store_result(response_content, response_type)
                     print(response_content)
