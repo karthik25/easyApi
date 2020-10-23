@@ -7,7 +7,7 @@ class Helptext:
 
     @staticmethod
     def print_help_text():
-        sample_text = '''
+        help_text = '''
         usage: easyApi [options]
 
         Options:
@@ -82,4 +82,4 @@ class Helptext:
 
         '''
 
-        print(textwrap.dedent(sample_text))
+        print(textwrap.dedent(help_text))
