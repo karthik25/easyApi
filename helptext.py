@@ -40,10 +40,10 @@ class Helptext:
         ***Option 2***
 
         easyApi -o https://someurl/swagger/v1/swagger.json
-        > list # to see the apis identified
-        > set list # to list the current settings, to see the defaults
-        > set multiple token_url=https://idp/connet/token,client_id=SomeClientId,client_secret=SomeClientSecret,grant_type=client_credentials,scope=someApi,token_type=Bearer
-        > set is_debug True
+            > list # to see the apis identified
+            > set list # to list the current settings, to see the defaults
+            > set multiple token_url=https://idp/connet/token,client_id=SomeClientId,client_secret=SomeClientSecret,grant_type=client_credentials,scope=someApi,token_type=Bearer
+            > set is_debug True
         
         Executing Apis:
         
@@ -58,15 +58,27 @@ class Helptext:
             
         To run the api with id 3, you can do the following:
         
-        > exec mellow count=5
+            > exec mellow count=5
         
         As you can see, to execute an api, you have to use the exec command, followed by the key, which is then followed 
         by a dictionary of parameters to replace the variables in the uri (count in this case). Same effect can be achieved
         by running the following commands as well:
         
-        > run mellow count=5
+            > run mellow count=5
         
-        > call mellow count=5
+            > call mellow count=5
+        
+        Filtering results:
+        
+        You can use the filter command to filter the last result. This command would list the entries with the email address
+        set to john.doe@mail.com
+        
+            > filter email john.doe@mail.com
+        
+        You can also pass modifiers to the filter command. As of now the only available modified is partial_match. This command
+        would list all the items with a partial match of john
+        
+            > filter email john partial_match=1        
 
         '''
 
