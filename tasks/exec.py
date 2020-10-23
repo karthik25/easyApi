@@ -31,7 +31,8 @@ class Exec:
 
         new_url = url
         for key_value in param_dict:
-            new_url = new_url.replace("{{{0}}}".format(key_value), param_dict[key_value])
+            if param_dict[key_value] != "":
+                new_url = new_url.replace("{{{0}}}".format(key_value), param_dict[key_value])
 
         return new_url
 
@@ -52,19 +53,23 @@ class Exec:
         all_apis = Openapis.get_all_apis()
 
         for api in all_apis:
-            if api["key"] == identifier:
+            if api["key"] == identifier or api["id"] == identifier:
                 param_dict = self.get_param_dict(arguments)
                 url = self.get_replaced_url(api["url"], param_dict)
-
-                # todo: if url still has {} stop proceeding
-
-                print("calling {0}".format(url))
 
                 ctx = ssl.create_default_context()
                 ctx.check_hostname = False
                 ctx.verify_mode = ssl.CERT_NONE
 
                 full_url = "{0}{1}".format(Openapis.get_base_url(), url)
+
+                url_parts_check = re.findall(r'[\{\}]', url)
+                if len(url_parts_check) > 0:
+                    print("Shell: unable to generate a valid url")
+                    return
+
+                print("calling {0}".format(url))
+
                 req_headers = Setter.get_api_headers()
 
                 req = urllib.request.Request(full_url, headers=req_headers)

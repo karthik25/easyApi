@@ -30,29 +30,38 @@ class Openapis:
         result = '{uri.scheme}://{uri.netloc}'.format(uri=parsed_uri)
         return result
 
+    # todo: add try...except
     @staticmethod
     def populate_all_apis(url):
-        print("Openapis: getting the apis")
-        ctx = ssl.create_default_context()
-        if Setter.is_ssl_enabled():
-            ctx.check_hostname = False
-            ctx.verify_mode = ssl.CERT_NONE
+        print("Openapis: getting the apis...please wait")
 
-        oapi_json = urllib.request.urlopen(url, context=ctx).read()
-        oapi_config = json.loads(oapi_json)
-        i = 1
-        for path in oapi_config["paths"]:
-            api_details = oapi_config["paths"][path]
-            if "get" in api_details.keys():
-                getter = api_details["get"]
-                if getter is not None:
-                    Openapis.api_listing.append({
-                        "id": i,
-                        "key": Openapis.api_short_words[i - 1],
-                        "url": path,
-                        "method": "get"
-                    })
-                    i = i + 1
+        try:
+            ctx = ssl.create_default_context()
+            if Setter.is_ssl_enabled():
+                ctx.check_hostname = False
+                ctx.verify_mode = ssl.CERT_NONE
+
+            oapi_json = urllib.request.urlopen(url, context=ctx).read()
+            oapi_config = json.loads(oapi_json)
+            i = 1
+            for path in oapi_config["paths"]:
+                api_details = oapi_config["paths"][path]
+                if "get" in api_details.keys():
+                    getter = api_details["get"]
+                    if getter is not None:
+                        Openapis.api_listing.append({
+                            "id": str(i),
+                            "key": Openapis.api_short_words[i - 1],
+                            "url": path,
+                            "method": "get"
+                        })
+                        i = i + 1
+
+            print("Openapis: processed the apis")
+            return True
+        except:
+            print("Openapis: unable to read the api spec")
+            return False
 
     @staticmethod
     def print_all_apis():

@@ -67,6 +67,10 @@ class Helptext:
             > run mellow count=5
         
             > call mellow count=5
+            
+        You can also use the index to execute an api, for example
+        
+            > exec 3 count=5
         
         Filtering results:
         
