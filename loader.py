@@ -8,6 +8,7 @@ from tasks.filter import Filter
 from tasks.call import Call
 from tasks.run import Run
 from tasks.result import Result
+from tasks.help import Help
 
 
 class Loader:

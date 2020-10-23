@@ -6,7 +6,7 @@ class Helptext:
         pass
 
     @staticmethod
-    def get_help_text():
+    def print_help_text():
         sample_text = '''
         usage: easyApi [options]
 
@@ -44,6 +44,29 @@ class Helptext:
         > set list # to list the current settings, to see the defaults
         > set multiple token_url=https://idp/connet/token,client_id=SomeClientId,client_secret=SomeClientSecret,grant_type=client_credentials,scope=someApi,token_type=Bearer
         > set is_debug True
+        
+        Executing Apis:
+        
+        Running the list command lists the API's (GET only)
+        
+           Id   |             Key     | Url
+        --------------------------------------------------------------------------
+            1   |            mine     | /api/values
+            2   |          marble     | /api/values/name/{name}
+            3   |          mellow     | /api/values/random/{count}
+            
+            
+        To run the api with id 3, you can do the following:
+        
+        > exec mellow count=5
+        
+        As you can see, to execute an api, you have to use the exec command, followed by the key, which is then followed 
+        by a dictionary of parameters to replace the variables in the uri (count in this case). Same effect can be achieved
+        by running the following commands as well:
+        
+        > run mellow count=5
+        
+        > call mellow count=5
 
         '''
 

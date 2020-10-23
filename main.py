@@ -20,7 +20,7 @@ for opt, arg in optlist:
         help_only = True
 
 if oapi_url == "" or help_only:
-    Helptext.get_help_text()
+    Helptext.print_help_text()
 else:
     Setter.set_key_value("oapi_url", oapi_url)
     Setter.set_key_value("disable_ssl", ssl_disable)

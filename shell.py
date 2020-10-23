@@ -12,7 +12,11 @@ class Shell:
         oapi_url = Setter.get_value_by_key("oapi_url")
         Openapis.populate_all_apis(oapi_url)
         loader = Loader()
-        print("Shell: Enter your command (set, list or exec)")
+        print("Shell: enter your command ('set', 'list', 'exec', 'filter' or 'help')")
+        print("Shell: exec also has aliases like 'call', 'run'")
+        print("Shell: use the command 'result' to see the last result")
+        print("Shell: use the command 'clear' to clear the screen")
+        print("Shell: use the command 'exit' to exit easyApi")
         command = ""
         while command != "exit":
             command = input("> ")
