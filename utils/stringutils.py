@@ -12,3 +12,8 @@ class Stringutils:
         lexer.whitespace = ','
         props = dict(pair.split('=', 1) for pair in lexer)
         return props
+
+    @staticmethod
+    def config_file_to_dict(file_name):
+        pass
+

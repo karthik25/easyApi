@@ -17,9 +17,11 @@ class Shell:
             return
 
         loader = Loader()
-        print("Shell: enter your command ('set', 'list', 'exec', 'filter', 'clear', 'exit' or 'help')")
-        print("Shell: exec also has aliases like 'call', 'run'")
+        print("Shell: enter your command (valid commands are 'set', 'list', 'exec', 'filter', 'clear', 'exit' or 'help')")
+        print("Shell: use the command 'exec' to run an api, run 'help' for more details")
+        print("Shell: 'exec' also has aliases like 'call', 'run'")
         print("Shell: use the command 'result' to see the last result")
+        print("Shell: type the command 'list' and press enter to view the apis")
         command = ""
         while command != "exit":
             command = input("> ")

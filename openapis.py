@@ -33,7 +33,7 @@ class Openapis:
     # todo: add try...except
     @staticmethod
     def populate_all_apis(url):
-        print("Openapis: getting the apis...please wait")
+        print("Shell: getting the apis...please wait")
 
         try:
             ctx = ssl.create_default_context()
@@ -57,10 +57,10 @@ class Openapis:
                         })
                         i = i + 1
 
-            print("Openapis: processed the apis")
+            print("Shell: processed the apis")
             return True
         except:
-            print("Openapis: unable to read the api spec")
+            print("Shell: unable to read the api spec")
             return False
 
     @staticmethod

@@ -82,7 +82,21 @@ class Helptext:
         You can also pass modifiers to the filter command. As of now the only available modified is partial_match. This command
         would list all the items with a partial match of john
         
-            > filter email john partial_match=1        
+            > filter email john partial_match=1
+            
+            
+        Using access tokens directly:
+        
+        If you are not using a configuration json file or using the set command to set the client id, secret etc, you can just
+        set the access token and token type as shown below to call apis
+        
+        easyApi -s https://someurl/swagger/v1/swagger.json
+        
+            > set token_type=Bearer,access_token=abc
+            
+        No authorization headers:
+        
+        By default, token type is set to None. So no authentication headers sent because of this        
 
         '''
 
