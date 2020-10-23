@@ -27,11 +27,13 @@ class Shell:
             if command == "exit":
                 return
 
-            # todo: add try...except
-            task_splits = shlex.split(command)
-            task_identifier = task_splits[0]
-            task_instance = loader.get_by_identifier(task_identifier)
-            if task_instance is None:
-                print("Shell: Don't know how to handle this")
-            else:
-                task_instance.run(task_splits[1:])
+            try:
+                task_splits = shlex.split(command)
+                task_identifier = task_splits[0]
+                task_instance = loader.get_by_identifier(task_identifier)
+                if task_instance is None:
+                    print("Shell: Don't know how to handle this")
+                else:
+                    task_instance.run(task_splits[1:])
+            except:
+                print("Shell: something went wrong")

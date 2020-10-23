@@ -46,6 +46,7 @@ class Exec:
     def run(self, args):
         if len(args) != 1 and len(args) != 2:
             print("usage: exec <identifier> [<dictionary>]")
+            return 
 
         identifier = args[0]
         arguments = args[1] if len(args) == 2 else ""
