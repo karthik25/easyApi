@@ -107,3 +107,19 @@ easyApi -s https://someurl/swagger/v1/swagger.json
 ***No authorization headers:***
 
 By default, token type is set to None. So no authentication headers sent because of this        
+
+##### Building an Executable
+
+In order to build an executable, you can do the following:
+
+* Install `pyinstaller` using `pip`
+
+```
+> pip install pyinstaller
+```
+
+* Run `pyinstaller` as shown below
+
+```
+c:\easyApi> pyinstaller --onefile --onedir -n easyApi --distpath C:\easyApi\easyApi main.py
+```
