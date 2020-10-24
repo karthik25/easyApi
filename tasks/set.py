@@ -1,5 +1,5 @@
 import shlex
-from tasks.setter import Setter
+from settings import Settings
 
 
 class Set:
@@ -11,18 +11,22 @@ class Set:
         return "set"
 
     def run(self, args):
+        if len(args) == 0:
+            print("usage: set <key> <value> or set list")
+            return
+
         type = args[0]
         values = args[1] if len(args) > 1 else ""
-        current_keys = Setter.get_current_keys()
+        current_keys = Settings.get_current_keys()
         if type == "list":
-            Setter.print_current_keys()
+            Settings.print_current_keys()
         if type == "multiple":
             lexer = shlex.shlex(values, posix=True)
             lexer.whitespace_split = True
             lexer.whitespace = ','
             props = dict(pair.split('=', 1) for pair in lexer)
-            Setter.set_multiple_keys(props)
+            Settings.set_multiple_keys(props)
         if type in current_keys:
             print("Set: setting {0}".format(type))
-            Setter.set_key_value(type, values)
+            Settings.set_key_value(type, values)
 

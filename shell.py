@@ -1,7 +1,7 @@
 import shlex
 from loader import Loader
 from openapis import Openapis
-from tasks.setter import Setter
+from settings import Settings
 
 
 class Shell:
@@ -9,7 +9,7 @@ class Shell:
         pass
 
     def start(self):
-        oapi_url = Setter.get_value_by_key("oapi_url")
+        oapi_url = Settings.get_value_by_key("oapi_url")
         read_status = Openapis.populate_all_apis(oapi_url)
 
         if not read_status:

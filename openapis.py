@@ -1,7 +1,7 @@
 import urllib.request
 import ssl
 import json
-from tasks.setter import Setter
+from settings import Settings
 from urllib.parse import urlparse
 
 
@@ -25,7 +25,7 @@ class Openapis:
 
     @staticmethod
     def get_base_url():
-        oapi_url = Setter.get_value_by_key("oapi_url")
+        oapi_url = Settings.get_value_by_key("oapi_url")
         parsed_uri = urlparse(oapi_url)
         result = '{uri.scheme}://{uri.netloc}'.format(uri=parsed_uri)
         return result
@@ -37,7 +37,7 @@ class Openapis:
 
         try:
             ctx = ssl.create_default_context()
-            if Setter.is_ssl_enabled():
+            if Settings.is_ssl_enabled():
                 ctx.check_hostname = False
                 ctx.verify_mode = ssl.CERT_NONE
 

@@ -1,7 +1,7 @@
 import getopt
 import sys
 import os
-from tasks.setter import Setter
+from settings import Settings
 from shell import Shell
 from helptext import Helptext
 from utils.stringutils import Stringutils
@@ -30,12 +30,12 @@ if config_file != '' and not os.path.isfile(config_file):
 if oapi_url == "" or help_only:
     Helptext.print_help_text()
 else:
-    Setter.set_key_value("oapi_url", oapi_url)
-    Setter.set_key_value("disable_ssl", ssl_disable)
+    Settings.set_key_value("oapi_url", oapi_url)
+    Settings.set_key_value("disable_ssl", ssl_disable)
 
     if config_file != '' and os.path.isfile(config_file):
         config_dict = Stringutils.config_file_to_dict(config_file)
-        Setter.set_multiple_keys(config_dict)
+        Settings.set_multiple_keys(config_dict)
 
     shell = Shell()
     shell.start()

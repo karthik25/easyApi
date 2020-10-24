@@ -2,7 +2,7 @@ import re
 import urllib.request
 import ssl
 import json
-from tasks.setter import Setter
+from settings import Settings
 from openapis import Openapis
 from result import Result
 from utils.stringutils import Stringutils
@@ -64,7 +64,7 @@ class Exec:
 
                 print("calling {0}".format(url))
 
-                req_headers = Setter.get_api_headers()
+                req_headers = Settings.get_api_headers()
 
                 req = urllib.request.Request(full_url, headers=req_headers)
                 api_response = urllib.request.urlopen(req, context=ctx)

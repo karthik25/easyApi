@@ -4,7 +4,7 @@ import urllib.parse
 import ssl
 
 
-class Setter:
+class Settings:
     key_value_dictionary = {
         "oapi_url": "",
         "access_token": "",
@@ -20,55 +20,55 @@ class Setter:
 
     @staticmethod
     def print_current_keys():
-        for key in Setter.key_value_dictionary.keys():
-            print("{0} => {1}".format(key, Setter.key_value_dictionary[key]))
+        for key in Settings.key_value_dictionary.keys():
+            print("{0} => {1}".format(key, Settings.key_value_dictionary[key]))
 
     @staticmethod
     def get_current_keys():
-        return Setter.key_value_dictionary.keys()
+        return Settings.key_value_dictionary.keys()
 
     @staticmethod
     def get_value_by_key(key):
-        return Setter.key_value_dictionary[key]
+        return Settings.key_value_dictionary[key]
 
     @staticmethod
     def is_ssl_enabled():
-        return Setter.key_value_dictionary["disable_ssl"] == True
+        return Settings.key_value_dictionary["disable_ssl"] == True
 
     @staticmethod
     def is_debug():
-        return Setter.key_value_dictionary["is_debug"] == True
+        return Settings.key_value_dictionary["is_debug"] == True
 
     @staticmethod
     def set_key_value(key, value):
-        all_keys = Setter.key_value_dictionary.keys()
+        all_keys = Settings.key_value_dictionary.keys()
         if key not in all_keys:
             print("Unknown key {0}".format(key))  # raise an exception?
             return
-        if type(Setter.key_value_dictionary[key]) == str:
-            Setter.key_value_dictionary[key] = value
+        if type(Settings.key_value_dictionary[key]) == str:
+            Settings.key_value_dictionary[key] = value
         else:
-            Setter.key_value_dictionary[key] = bool(value) # find a safer way?
+            Settings.key_value_dictionary[key] = bool(value) # find a safer way?
 
     @staticmethod
     def set_multiple_keys(dict):
         for key in dict.keys():
-            if key in Setter.key_value_dictionary.keys():
-                Setter.key_value_dictionary[key] = dict[key]
+            if key in Settings.key_value_dictionary.keys():
+                Settings.key_value_dictionary[key] = dict[key]
 
     @staticmethod
     def generate_access_token():
-        full_url = Setter.key_value_dictionary["token_endpoint"]
+        full_url = Settings.key_value_dictionary["token_endpoint"]
 
         post_data = {
-            "grant_type": Setter.key_value_dictionary["grant_type"],
-            "scope": Setter.key_value_dictionary["scope"],
-            "client_id": Setter.key_value_dictionary["client_id"],
-            "client_secret": Setter.key_value_dictionary["client_secret"]
+            "grant_type": Settings.key_value_dictionary["grant_type"],
+            "scope": Settings.key_value_dictionary["scope"],
+            "client_id": Settings.key_value_dictionary["client_id"],
+            "client_secret": Settings.key_value_dictionary["client_secret"]
         }
 
         ctx = ssl.create_default_context()
-        if Setter.is_ssl_enabled():
+        if Settings.is_ssl_enabled():
             ctx.check_hostname = False
             ctx.verify_mode = ssl.CERT_NONE
 
@@ -83,20 +83,20 @@ class Setter:
 
     @staticmethod
     def get_api_headers():
-        if Setter.key_value_dictionary["token_type"] == "None":
+        if Settings.key_value_dictionary["token_type"] == "None":
             print("Setter: token type is None - returning empty headers")
             return {}
 
-        if Setter.key_value_dictionary["token_type"] == "Bearer":
-            if Setter.key_value_dictionary["access_token"] != "":
+        if Settings.key_value_dictionary["token_type"] == "Bearer":
+            if Settings.key_value_dictionary["access_token"] != "":
                 print("Setter: using the access token")
-                return { "Authorization": "Bearer {0}".format(Setter.key_value_dictionary["access_token"])}
+                return { "Authorization": "Bearer {0}".format(Settings.key_value_dictionary["access_token"])}
             else:
-                if Setter.is_debug():
+                if Settings.is_debug():
                     print("Setter: genreating the access token")
-                accessToken = Setter.generate_access_token()
-                if Setter.is_debug():
+                accessToken = Settings.generate_access_token()
+                if Settings.is_debug():
                     print("Setter: genreated the access token")
                 return {"Authorization": "Bearer {0}".format(accessToken)}
 
-        raise Exception("Do not know how to handle {0}".format(Setter.key_value_dictionary["token_type"]))
+        raise Exception("Do not know how to handle {0}".format(Settings.key_value_dictionary["token_type"]))

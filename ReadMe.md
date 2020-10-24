@@ -1,56 +1,69 @@
-# Getting Started :: easyApi
+## Getting Started :: easyApi
 
-easyApi is an app that is intended to provide an environment to call and test apis without jumping across multiple applications. All you have to do is pass the swagger json url of a hosted api (OpenAPI) and easyApi will do the rest. It builds a list of all the `GET` apis offered and lets you run them with a veriety of shortcuts. Read through the read me to know more!
+The **easyApi** project is intended to provide an environment to call and test apis without jumping across multiple applications. All you have to do is pass the swagger json url of a hosted api (OpenAPI) and easyApi will do the rest. It builds a list of all the `GET` apis offered and lets you run them with a veriety of shortcuts. Read through the read me to know more!
 
 **usage:** easyApi [options]
 
-Options:
+**Options:**
 
--h	: Display this help text
--o	: OpenApi json url
--c	: Initial settings (if you don't want to type it in everytime)
--s 	: Disable ssl validation
+    -h	: Display this help text
+    -o	: OpenApi json url
+    -c	: Initial settings (if you don't want to 
+              type it in everytime)
+    -s 	: Disable ssl validation
 
-Sample usages:
+##### Sample usages:
 
 ***Option 1***
 
+```
 easyApi -o https://someurl.com/swagger/v1/swagger.json -c c:/users/administrator/config.json
+```
 
-[config.json sample]
+The configuration file passed has the resemble the sample below. If the `token_type` is `Bearer`, 
+either the `access_token` should be provided or the `client_id`,`client_secret`,`scope`, `token_endpoint`
+should be provided. 
 
 ```json
 {
   "access_token": "",
-  "token_endpoint": "https://idp/connect/token"
+  "token_endpoint": "https://idp/connect/token",
   "client_id": "SomeClientId",
   "client_secret": "SomeClientSecret",
   "grant_type": "client_credentials",
-  "scope": "someApi"
+  "scope": "someApi",
   "token_type": "Bearer",
-  "disable_ssl": False,
-  "is_debug": False
+  "disable_ssl": false,
+  "is_debug": false
 }
 ```
 
 ***Option 2***
 
+```
 easyApi -o https://someurl/swagger/v1/swagger.json
-    > list # to see the apis identified
-    > set list # to list the current settings, to see the defaults
+```
+
+    # to see the apis identified
+    > list
+    # to list the current settings, to see the defaults
+    > set list
+    # to set multiple values at the same time 
     > set multiple token_url=https://idp/connet/token,client_id=SomeClientId,client_secret=SomeClientSecret,grant_type=client_credentials,scope=someApi,token_type=Bearer
+    # to enable the debug mode
     > set is_debug True
 
-Executing Apis:
+##### Executing Apis:
 
 Running the list command lists the API's (GET only)
 
+```text
    Id   |             Key     | Url
 --------------------------------------------------------------------------
     1   |            mine     | /api/values
     2   |          marble     | /api/values/name/{name}
     3   |          mellow     | /api/values/random/{count}
-
+```
 
 To run the api with id 3, you can do the following:
 
@@ -86,10 +99,12 @@ Using access tokens directly:
 If you are not using a configuration json file or using the set command to set the client id, secret etc, you can just
 set the access token and token type as shown below to call apis
 
+```
 easyApi -s https://someurl/swagger/v1/swagger.json
+```
 
     > set token_type=Bearer,access_token=abc
 
-No authorization headers:
+***No authorization headers:***
 
 By default, token type is set to None. So no authentication headers sent because of this        

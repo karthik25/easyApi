@@ -10,4 +10,8 @@ class Call(Exec):
         return "call"
 
     def run(self, args):
+        if len(args) != 1 and len(args) != 2:
+            print("usage: call <identifier> [<dictionary>]")
+            return
+
         super(Call, self).run(args)

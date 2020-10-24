@@ -1,7 +1,7 @@
 import json
 from result import Result
 from utils.stringutils import Stringutils
-from tasks.setter import Setter
+from settings import Settings
 
 
 class Filter:
@@ -19,7 +19,7 @@ class Filter:
         filter_props = self.get_filter_props(args)
         last_result = Result.last_result
         result_items = []
-        if Setter.is_debug():
+        if Settings.is_debug():
             print("Filter: partial match mode {0}".format(filter_props["partial_match"]))
         for item in last_result:
             if filter_props["partial_match"]:
