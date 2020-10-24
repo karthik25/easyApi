@@ -46,7 +46,7 @@ class Exec:
     def run(self, args):
         if len(args) != 1 and len(args) != 2:
             print("usage: exec <identifier> [<dictionary>]")
-            return 
+            return
 
         identifier = args[0]
         arguments = args[1] if len(args) == 2 else ""
@@ -66,7 +66,7 @@ class Exec:
 
                 url_parts_check = re.findall(r'[\{\}]', url)
                 if len(url_parts_check) > 0:
-                    print("Shell: unable to generate a valid url")
+                    print("easyApi Shell: unable to generate a valid url")
                     return
 
                 print("calling {0}".format(url))

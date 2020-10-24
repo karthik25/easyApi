@@ -1,4 +1,5 @@
 import shlex
+import json
 
 
 class Stringutils:
@@ -15,5 +16,12 @@ class Stringutils:
 
     @staticmethod
     def config_file_to_dict(file_name):
-        pass
+        try:
+            with open(file_name, 'r') as file:
+                json_file_data = file.read()
 
+            settings = json.loads(json_file_data)
+            return settings
+        except:
+            print("easyApi Shell: configuration file passed cannot be parsed, so ignoring")
+            return {}
