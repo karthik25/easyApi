@@ -80,7 +80,7 @@ You can also use the index to execute an api, for example
 
     > exec 3 count=5
 
-Filtering results:
+***Filtering results:***
 
 You can use the filter command to filter the last result. This command would list the entries with the email address
 set to john.doe@mail.com
