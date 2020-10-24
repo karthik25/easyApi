@@ -8,8 +8,7 @@ The **easyApi** project is intended to provide an environment to call and test a
 
     -h	: Display this help text
     -o	: OpenApi json url
-    -c	: Initial settings (if you don't want to 
-              type it in everytime)
+    -c	: Initial settings (if you don't want to type it in everytime)
     -s 	: Disable ssl validation
 
 ##### Sample usages:
@@ -94,7 +93,7 @@ would list all the items with a partial match of john
     > filter email john partial_match=1
 
 
-Using access tokens directly:
+***Using access tokens directly:***
 
 If you are not using a configuration json file or using the set command to set the client id, secret etc, you can just
 set the access token and token type as shown below to call apis
