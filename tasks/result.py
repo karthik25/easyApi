@@ -1,8 +1,9 @@
 import result
 import json
+from tasks.task import Task
 
 
-class Result:
+class Result(Task):
     def __init__(self):
         pass
 

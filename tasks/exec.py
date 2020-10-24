@@ -6,9 +6,10 @@ from settings import Settings
 from openapis import Openapis
 from result import Result
 from utils.stringutils import Stringutils
+from tasks.task import Task
 
 
-class Exec:
+class Exec(Task):
     def __init__(self):
         pass
 

@@ -2,9 +2,10 @@ import json
 from result import Result
 from utils.stringutils import Stringutils
 from settings import Settings
+from tasks.task import Task
 
 
-class Filter:
+class Filter(Task):
     def __init__(self):
         pass
 

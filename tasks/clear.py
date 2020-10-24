@@ -1,7 +1,8 @@
 import os
+from tasks.task import Task
 
 
-class Clear:
+class Clear(Task):
     def __init__(self):
         pass
 

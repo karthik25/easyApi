@@ -16,6 +16,7 @@ class Helptext:
         -o	: OpenApi json url
         -c	: Initial settings (if you don't want to type it in everytime)
         -s 	: Disable ssl validation
+        -d  : Enable debug mode
 
         Sample usages:
 

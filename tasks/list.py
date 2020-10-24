@@ -1,7 +1,8 @@
 from openapis import Openapis
+from tasks.task import Task
 
 
-class List:
+class List(Task):
     def __init__(self):
         pass
 

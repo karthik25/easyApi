@@ -1,7 +1,8 @@
 from helptext import Helptext
+from tasks.task import Task
 
 
-class Help:
+class Help(Task):
     def __init__(self):
         pass
 

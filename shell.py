@@ -1,4 +1,5 @@
 import shlex
+import traceback
 from loader import Loader
 from openapis import Openapis
 from settings import Settings
@@ -38,5 +39,7 @@ class Shell:
                     print("easyApi Shell: Don't know how to handle this")
                 else:
                     task_instance.run(task_splits[1:])
-            except:
+            except Exception:
+                if Settings.is_debug():
+                    print(traceback.format_exc())
                 print("easyApi Shell: something went wrong")

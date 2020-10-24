@@ -1,8 +1,9 @@
 import shlex
 from settings import Settings
+from tasks.task import Task
 
 
-class Set:
+class Set(Task):
     def __init__(self):
         pass
 
