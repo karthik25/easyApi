@@ -15,8 +15,8 @@ class Loader:
     def __init__(self):
         pass
 
-    def get_by_identifier(self, identifier):
-        # create a dictionary and store it in Typedict (say)
+    @staticmethod
+    def get_by_identifier(identifier):
         all_cls = globals()
         for cls in all_cls:
             current_cls = globals()[cls]

@@ -14,9 +14,9 @@ class Helptext:
 
         -h	: Display this help text
         -o	: OpenApi json url
-        -c	: Initial settings (if you don't want to type it in everytime)
+        -c	: Initial settings (if you don't want to type it in every time)
         -s 	: Disable ssl validation
-        -d  : Enable debug mode
+        -d 	: Enable debug mode
 
         Sample usages:
 
@@ -24,15 +24,17 @@ class Helptext:
 
         easyApi -o https://someurl.com/swagger/v1/swagger.json -c c:/users/administrator/config.json
 
-        [config.json sample]
+        The configuration file passed has the resemble the sample below. If the token_type is Bearer, 
+        either the access_token should be provided or the client_id,client_secret,scope, token_endpoint
+        should be provided. 
 
         {
           "access_token": "",
-          "token_endpoint": "https://idp/connect/token"
+          "token_endpoint": "https://idp/connect/token",
           "client_id": "SomeClientId",
           "client_secret": "SomeClientSecret",
           "grant_type": "client_credentials",
-          "scope": "someApi"
+          "scope": "someApi",
           "token_type": "Bearer",
           "disable_ssl": False,
           "is_debug": False
@@ -41,9 +43,13 @@ class Helptext:
         ***Option 2***
 
         easyApi -o https://someurl/swagger/v1/swagger.json
-            > list # to see the apis identified
-            > set list # to list the current settings, to see the defaults
+            # to see the apis identified
+            > list
+            # to list the current settings, to see the defaults
+            > set list
+            # to set multiple values at the same time
             > set multiple token_url=https://idp/connet/token,client_id=SomeClientId,client_secret=SomeClientSecret,grant_type=client_credentials,scope=someApi,token_type=Bearer
+            # to enable the debug mode
             > set is_debug True
         
         Executing Apis:

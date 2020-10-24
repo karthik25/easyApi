@@ -8,7 +8,7 @@ The **easyApi** project is intended to provide an environment to call and test a
 
     -h	: Display this help text
     -o	: OpenApi json url
-    -c	: Initial settings (if you don't want to type it in everytime)
+    -c	: Initial settings (if you don't want to type it in every time)
     -s 	: Disable ssl validation
 
 ##### Sample usages:

@@ -17,7 +17,6 @@ class Shell:
             print("easyApi Shell: failed to start")
             return
 
-        loader = Loader()
         print("easyApi Shell: valid commands are (valid commands are 'set', 'list', 'exec', 'filter', 'clear', 'exit' or 'help')")
         print("easyApi Shell: use the command 'exec' to run an api, run 'help' for more details")
         print("easyApi Shell: 'exec' also has aliases like 'call', 'run'")
@@ -34,7 +33,7 @@ class Shell:
             try:
                 task_splits = shlex.split(command)
                 task_identifier = task_splits[0]
-                task_instance = loader.get_by_identifier(task_identifier)
+                task_instance = Loader.get_by_identifier(task_identifier)
                 if task_instance is None:
                     print("easyApi Shell: Don't know how to handle this")
                 else:
