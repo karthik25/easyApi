@@ -45,7 +45,8 @@ class Loader:
                 if inspect.isclass(current_cls) and issubclass(current_cls, Task):
                     handles = getattr(current_cls, "handles", None)
                     if handles is not None:
-                        print("easyApi Shell: adding {0} to the task dictionary".format(str(cls)))
+                        if Settings.is_debug():
+                            print("easyApi Shell: adding {0} to the task dictionary".format(str(cls)))
                         handles_value = handles()
                         Loader.task_dictionary[handles_value] = current_cls
         else:
