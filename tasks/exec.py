@@ -1,11 +1,11 @@
 import re
-import shlex
 import urllib.request
 import ssl
 import json
 from tasks.setter import Setter
 from openapis import Openapis
 from result import Result
+from utils.stringutils import Stringutils
 
 
 class Exec:
@@ -36,13 +36,6 @@ class Exec:
 
         return new_url
 
-    def get_param_dict(self, arguments):
-        lexer = shlex.shlex(arguments, posix=True)
-        lexer.whitespace_split = True
-        lexer.whitespace = ','
-        props = dict(pair.split('=', 1) for pair in lexer)
-        return props
-
     def run(self, args):
         if len(args) != 1 and len(args) != 2:
             print("usage: exec <identifier> [<dictionary>]")
@@ -55,7 +48,7 @@ class Exec:
 
         for api in all_apis:
             if api["key"] == identifier or api["id"] == identifier:
-                param_dict = self.get_param_dict(arguments)
+                param_dict = Stringutils.args_to_dict(arguments)
                 url = self.get_replaced_url(api["url"], param_dict)
 
                 ctx = ssl.create_default_context()
