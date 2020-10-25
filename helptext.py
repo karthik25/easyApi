@@ -62,6 +62,18 @@ class Helptext:
             > set multiple token_url=https://idp/connet/token,client_id=SomeClientId,client_secret=SomeClientSecret,grant_type=client_credentials,scope=someApi,token_type=Bearer
             # to enable the debug mode
             > set is_debug True
+            
+        Inspecting Apis:
+        
+        The 'list' command can be used to inspect the apis discovered. Running list without any parameters would list all the apis discovered.
+        This behavior can be modified by passing a number or a string. 
+        
+        # list all the apis
+        > list
+        # list the top 5 apis alone
+        > list 5
+        # list the apis that has the word users as part of it
+        > list users
         
         Executing Apis:
         

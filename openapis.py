@@ -69,3 +69,10 @@ class Openapis:
         print("--------------------------------------------------------------------------")
         for api in Openapis.api_listing:
             print("{0: >5}   | {1: >15}     | {2}".format(api["id"],api["key"],api["url"]))
+
+    @staticmethod
+    def print_selected_apis(apis):
+        print("{0: >5}   | {1: >15}     | {2}".format("Id", "Key", "Url"))
+        print("--------------------------------------------------------------------------")
+        for api in apis:
+            print("{0: >5}   | {1: >15}     | {2}".format(api["id"],api["key"],api["url"]))
