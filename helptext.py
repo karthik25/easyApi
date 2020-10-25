@@ -73,7 +73,7 @@ class Helptext:
         
         Executing Apis:
         
-        Running the list command lists the API's (GET only)
+        Consider a subset of the apis listed
         
            Id   |             Key     | Url
         --------------------------------------------------------------------------

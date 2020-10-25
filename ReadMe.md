@@ -1,6 +1,8 @@
 ## Getting Started :: easyApi
 
-The **easyApi** project is intended to provide an environment to call and test apis without jumping across multiple applications. All you have to do is pass the swagger json url of a hosted api (OpenAPI) and easyApi will do the rest. It builds a list of all the `GET` apis offered and lets you run them with a veriety of shortcuts. Read through the read me to know more!
+The **easyApi** project is intended to provide an environment to call and test apis without jumping across multiple applications. All you have to 
+do is pass the swagger json url of a hosted api (OpenAPI) and easyApi will do the rest. It builds a list of all the `GET` apis offered and lets 
+you run them with a variety of shortcuts. Read through the rest of this document to know more.
 
 **usage:** easyApi.exe -o openapi-json-url [options]
 
@@ -74,7 +76,7 @@ This behavior can be modified by passing a number or a string.
 
 ##### Executing Apis:
 
-Running the list command lists the API's (GET only)
+Consider a subset of the apis listed:
 
 ```text
    Id   |             Key     | Url
