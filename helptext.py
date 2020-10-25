@@ -8,13 +8,13 @@ class Helptext:
     @staticmethod
     def print_help_text():
         help_text = '''
-        usage: easyApi [options]
+        usage: easyApi.exe -o openapi-json-url [options]
 
         Options:
 
         -h	: Display this help text
-        -o	: OpenApi json url
-        -c	: Initial settings (if you don't want to type it in every time)
+        -o	: OpenApi json url that has the API specification
+        -c	: A json file with initial settings (if you don't want to type it in every time)
         -s 	: Disable ssl validation
         -d 	: Enable debug mode
 
@@ -22,21 +22,18 @@ class Helptext:
 
         ***Option 1***
 
-        easyApi -o https://someurl.com/swagger/v1/swagger.json -c c:/users/administrator/config.json
+        easyApi.exe -o https://someurl.com/swagger/v1/swagger.json -c c:\\users\\administrator\\settings.json
 
         The configuration file passed has the resemble the sample below. If the token_type is Bearer, 
-        either the access_token should be provided or the client_id,client_secret,scope, token_endpoint
-        should be provided. 
+        either the token_endpoint, client_id, client_secret and scope should be provided or the access_token should 
+        be provided should be provided. 
 
         {
           "token_endpoint": "https://idp/connect/token",
           "client_id": "SomeClientId",
           "client_secret": "SomeClientSecret",
-          "grant_type": "client_credentials",
           "scope": "someApi",
-          "token_type": "Bearer",
-          "disable_ssl": False,
-          "is_debug": False
+          "token_type": "Bearer"
         }
         
         The settings in this file is used to generate an access token using [RFC 6749](https://tools.ietf.org/html/rfc6749) 
@@ -46,20 +43,19 @@ class Helptext:
         
         {
           "access_token": "abc",
-          "token_type": "Bearer",
-          "disable_ssl": False,
-          "is_debug": False
+          "token_type": "Bearer"
         }
 
         ***Option 2***
 
-        easyApi -o https://someurl/swagger/v1/swagger.json
+        easyApi.exe -o https://someurl/swagger/v1/swagger.json
+        
             # to see the apis identified
             > list
             # to list the current settings, to see the defaults
             > set list
             # to set multiple values at the same time
-            > set multiple token_url=https://idp/connet/token,client_id=SomeClientId,client_secret=SomeClientSecret,grant_type=client_credentials,scope=someApi,token_type=Bearer
+            > set multiple token_endpoint=https://idp/connet/token,client_id=SomeClientId,client_secret=SomeClientSecret,scope=someApi,token_type=Bearer
             # to enable the debug mode
             > set is_debug True
             
@@ -113,20 +109,26 @@ class Helptext:
         would list all the items with a partial match of john
         
             > filter email john partial_match=1
-            
-            
+                        
         Using access tokens directly:
         
         If you are not using a configuration json file or using the set command to set the client id, secret etc, you can just
         set the access token and token type as shown below to call apis
         
-        easyApi -s https://someurl/swagger/v1/swagger.json
+        easyApi.exe -o https://someurl/swagger/v1/swagger.json
         
             > set token_type=Bearer,access_token=abc
             
         No authorization headers:
         
         By default, token type is set to None. So no authentication headers sent because of this        
+
+        Disable ssl certificate validation:
+        
+        If the OpenAPI specification is that of a development server without a valid ssl certificate, you can pass -s to disable 
+        the certificate validation as shown below:
+        
+        easyApi.exe -o https://someurl/swagger/v1/swagger.json -s
 
         '''
 
