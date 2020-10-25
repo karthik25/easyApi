@@ -2,11 +2,13 @@ import re
 import urllib.request
 import ssl
 import json
+import traceback
 from settings import Settings
 from openapis import Openapis
 from result import Result
 from utils.stringutils import Stringutils
 from tasks.task import Task
+from urllib.error import HTTPError
 
 
 class Exec(Task):
@@ -68,17 +70,22 @@ class Exec(Task):
                 req_headers = Settings.get_api_headers()
 
                 req = urllib.request.Request(full_url, headers=req_headers)
-                api_response = urllib.request.urlopen(req, context=ctx)
+                try:
+                    api_response = urllib.request.urlopen(req, context=ctx)
 
-                response_info = api_response.info()
-                response_content = api_response.read()
-                response_type = response_info.get_content_type()
-                response_code = api_response.status
-                print("easyApi Shell: response code (type): {0} ({1})".format(response_code, response_type))
-                if response_type == "application/json":
-                    content_json = json.loads(response_content)
-                    Result.store_result(content_json, response_type)
-                    print(json.dumps(content_json, indent=4))
-                else:
-                    Result.store_result(response_content, response_type)
-                    print(response_content)
+                    response_info = api_response.info()
+                    response_content = api_response.read()
+                    response_type = response_info.get_content_type()
+                    response_code = api_response.status
+                    print("easyApi Shell: response code (type): {0} ({1})".format(response_code, response_type))
+                    if response_type == "application/json":
+                        content_json = json.loads(response_content)
+                        Result.store_result(content_json, response_type)
+                        print(json.dumps(content_json, indent=4))
+                    else:
+                        Result.store_result(response_content, response_type)
+                        print(response_content)
+                except HTTPError as err:
+                    print("easyApi Shell: api call failed w/ the error {0}".format(err))
+                    if Settings.is_debug():
+                        print(traceback.format_exc())
