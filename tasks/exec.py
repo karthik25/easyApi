@@ -63,7 +63,7 @@ class Exec(Task):
                     print("easyApi Shell: unable to generate a valid url")
                     return
 
-                print("calling {0}".format(url))
+                print("easyApi Shell: calling {0}".format(url))
 
                 req_headers = Settings.get_api_headers()
 
@@ -73,6 +73,8 @@ class Exec(Task):
                 response_info = api_response.info()
                 response_content = api_response.read()
                 response_type = response_info.get_content_type()
+                response_code = api_response.status
+                print("easyApi Shell: response code (type): {0} ({1})".format(response_code, response_type))
                 if response_type == "application/json":
                     content_json = json.loads(response_content)
                     Result.store_result(content_json, response_type)

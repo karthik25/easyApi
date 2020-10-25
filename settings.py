@@ -84,19 +84,21 @@ class Settings:
     @staticmethod
     def get_api_headers():
         if Settings.key_value_dictionary["token_type"] == "None":
-            print("Setter: token type is None - returning empty headers")
+            if Settings.is_debug():
+                print("easyApi Shell: token type is None - returning empty headers")
             return {}
 
         if Settings.key_value_dictionary["token_type"] == "Bearer":
             if Settings.key_value_dictionary["access_token"] != "":
-                print("Setter: using the access token")
+                if Settings.is_debug():
+                    print("easyApi Shell: using the access token")
                 return { "Authorization": "Bearer {0}".format(Settings.key_value_dictionary["access_token"])}
             else:
                 if Settings.is_debug():
-                    print("Setter: genreating the access token")
+                    print("easyApi Shell: genreating the access token")
                 accessToken = Settings.generate_access_token()
                 if Settings.is_debug():
-                    print("Setter: genreated the access token")
+                    print("easyApi Shell: genreated the access token")
                 return {"Authorization": "Bearer {0}".format(accessToken)}
 
         raise Exception("Do not know how to handle {0}".format(Settings.key_value_dictionary["token_type"]))
