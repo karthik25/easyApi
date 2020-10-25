@@ -50,8 +50,8 @@ class Helptext:
 
         easyApi.exe -o https://someurl/swagger/v1/swagger.json
         
-            # to see the apis identified
-            > list
+        In this case, the settings are provided on the fly and can be updated at a later point as well.
+        
             # to list the current settings, to see the defaults
             > set list
             # to set multiple values at the same time
