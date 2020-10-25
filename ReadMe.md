@@ -10,6 +10,7 @@ The **easyApi** project is intended to provide an environment to call and test a
     -o	: OpenApi json url
     -c	: Initial settings (if you don't want to type it in every time)
     -s 	: Disable ssl validation
+    -d 	: Enable debug mode
 
 ##### Sample usages:
 
@@ -25,12 +26,24 @@ should be provided.
 
 ```json
 {
-  "access_token": "",
   "token_endpoint": "https://idp/connect/token",
   "client_id": "SomeClientId",
   "client_secret": "SomeClientSecret",
   "grant_type": "client_credentials",
   "scope": "someApi",
+  "token_type": "Bearer",
+  "disable_ssl": false,
+  "is_debug": false
+}
+```
+
+The settings in this file is used to generate an access token using [RFC 6749](https://tools.ietf.org/html/rfc6749) (tested using the [identity server](https://docs.identityserver.io/en/dev/endpoints/token.html))
+
+(or)
+
+```json
+{
+  "access_token": "abc",
   "token_type": "Bearer",
   "disable_ssl": false,
   "is_debug": false

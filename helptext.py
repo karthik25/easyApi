@@ -29,12 +29,23 @@ class Helptext:
         should be provided. 
 
         {
-          "access_token": "",
           "token_endpoint": "https://idp/connect/token",
           "client_id": "SomeClientId",
           "client_secret": "SomeClientSecret",
           "grant_type": "client_credentials",
           "scope": "someApi",
+          "token_type": "Bearer",
+          "disable_ssl": False,
+          "is_debug": False
+        }
+        
+        The settings in this file is used to generate an access token using [RFC 6749](https://tools.ietf.org/html/rfc6749) 
+        (tested using the [identity server](https://docs.identityserver.io/en/dev/endpoints/token.html))
+        
+        (or)
+        
+        {
+          "access_token": "abc",
           "token_type": "Bearer",
           "disable_ssl": False,
           "is_debug": False
