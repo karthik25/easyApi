@@ -17,12 +17,12 @@ class Shell:
             print("easyApi Shell: failed to start")
             return
 
-        print("easyApi Shell: valid commands are (valid commands are 'set', 'list', 'exec', 'filter', 'clear', 'exit' or 'help')")
+        print("easyApi Shell: valid commands are 'set', 'list', 'exec', 'filter', 'clear', 'exit' and 'help'")
         print("easyApi Shell: use the command 'exec' to run an api, run 'help' for more details")
         print("easyApi Shell: 'exec' also has aliases like 'call', 'run'")
         print("easyApi Shell: use the command 'result' to see the last result")
         print("easyApi Shell: run the command 'set list' to view the current settings")
-        print("easyApi Shell: run the command 'list' and press enter to view the apis")
+        print("easyApi Shell: run the command 'list' to view the apis discovered")
         command = ""
         while command != "exit":
             command = input("> ")
