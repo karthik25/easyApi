@@ -154,3 +154,5 @@ In order to build an executable, you can do the following:
 ```
 c:\easyApi> pyinstaller --onefile --onedir -n easyApi --distpath C:\easyApi\easyApi main.py
 ```
+
+Repo url: https://github.com/karthik25/easyApi
